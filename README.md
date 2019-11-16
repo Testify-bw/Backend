@@ -20,6 +20,7 @@ and dev dependencies
 - supertest
 
 ###Folder and File Structure
+
 The below represents the scaffolding structure for the project.
 
     root
@@ -48,11 +49,15 @@ The below represents the scaffolding structure for the project.
     		seeds
 
 ##Scripts
+
 Use `npm run tests` to run tests.
 User `npm run server` to run server.
+
 ##Database
+
 The primary database for this API is `database.db3`. The testing database is `test.db3`.
 Postgres will be adopted during deployment.
+
 ####Tables
 
 | `users`    | type    | required          | unique |
@@ -68,6 +73,7 @@ Data in `users` will initially be seeded with filler data.
 \*\*Role is expected to be either `instructor` or `student`.
 
 ##Endpoints
+
 ###Registration
 
 | Method | Endpoint      | Data Sent (Required)      | Data Sent (Optional)  | Data Received                                    |
