@@ -19,8 +19,7 @@ and dev dependencies
 - nodemon
 - supertest
 
-
- ### Folder and File Structure
+### Folder and File Structure
 
 The below represents the scaffolding structure for the project.
 
@@ -87,4 +86,6 @@ When the API recieves a user, it will run checks
 - to verify that the password meets a minimum length
 - to verify that the role is either `student` or `instructor`
 
-When one of the above tests fail the server will send back an object with a message property which describes that an error has been encountered. The second property of the object is an array containing error messages for the failed tests. For example, when a user attempts to register an account with no role specified, the server returns the following object: `{message: 'Invalid registration information was provided, see errors for details.', errors: ['Role must be 'student' or 'instructor.']`
+When one of the above tests fail the server will send back an object with a message property which describes that an error has been encountered. The second property of the object is an array containing error messages for the failed tests. For example, when a user attempts to register an account with no role specified, the server returns the following object: `{message: 'x registration error(s) were encountered. ', errors: ['Role must be 'student' or 'instructor.']`
+
+### Login

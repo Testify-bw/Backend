@@ -26,7 +26,7 @@ router.post('/', (req, res) => {
       })
   } else {
     res.status(400).json({
-      message: `Invalid registration information was provided, see errors for details.`,
+      message: `${validationResult.errors.length} registration error(s) were encountered. See errors for details.`,
       errors: validationResult.errors
     })
   }
