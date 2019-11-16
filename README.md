@@ -76,9 +76,9 @@ Data in `users` will initially be seeded with filler data.
 
 ### Registration
 
-| Method | Endpoint      | Data Sent (Required)     | Data Sent (Optional)  | Data Returned                                    |
-| ------ | ------------- | ------------------------ | --------------------- | ------------------------------------------------ |
-| POST   | /api/register | username, password, role | first_name, last_name | object id, username, first_name, last_name, role |
+| Method | Endpoint                                      | Data Sent (Required)     | Data Sent (Optional)  | Data Returned                                    |
+| ------ | --------------------------------------------- | ------------------------ | --------------------- | ------------------------------------------------ |
+| POST   | https://bw-testify.herokuapp.com/api/register | username, password, role | first_name, last_name | object id, username, first_name, last_name, role |
 
 When the API recieves a user, it will run checks
 
@@ -90,9 +90,9 @@ When one of the above tests fail the server will send back an object with a mess
 
 ### Login
 
-| Method | Endpoint   | Data Sent (Required) | Data Sent (Optional) | Data Returned      |
-| ------ | ---------- | -------------------- | -------------------- | ------------------ |
-| POST   | /api/login | username, password   | n/a                  | JSON Web Token\*\* |
+| Method | Endpoint                                   | Data Sent (Required) | Data Sent (Optional) | Data Returned      |
+| ------ | ------------------------------------------ | -------------------- | -------------------- | ------------------ |
+| POST   | https://bw-testify.herokuapp.com/api/login | username, password   | n/a                  | JSON Web Token\*\* |
 
 When a login request is made, the server will check if the username exists, and if so, whether the password is correct.
 
