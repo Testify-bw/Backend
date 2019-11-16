@@ -15,7 +15,7 @@ router.post('/', (req, res) => {
 
     Users.add(user)
       .then(user => {
-        console.log(`user in response from registration POST`, user)
+        // console.log(`user in response from registration POST`, user)
         res.status(201).json(user);
       })
       .catch(err => {

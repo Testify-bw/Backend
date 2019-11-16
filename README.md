@@ -76,9 +76,9 @@ Data in `users` will initially be seeded with filler data.
 
 ### Registration
 
-| Method | Endpoint      | Data Sent (Required)      | Data Sent (Optional)  | Data Received                                    |
-| ------ | ------------- | ------------------------- | --------------------- | ------------------------------------------------ |
-| POST   | /api/register | username, password, rolle | first_name, last_name | object id, username, first_name, last_name, role |
+| Method | Endpoint      | Data Sent (Required)     | Data Sent (Optional)  | Data Returned                                    |
+| ------ | ------------- | ------------------------ | --------------------- | ------------------------------------------------ |
+| POST   | /api/register | username, password, role | first_name, last_name | object id, username, first_name, last_name, role |
 
 When the API recieves a user, it will run checks
 
@@ -89,3 +89,12 @@ When the API recieves a user, it will run checks
 When one of the above tests fail the server will send back an object with a message property which describes that an error has been encountered. The second property of the object is an array containing error messages for the failed tests. For example, when a user attempts to register an account with no role specified, the server returns the following object: `{message: 'x registration error(s) were encountered. ', errors: ['Role must be 'student' or 'instructor.']`
 
 ### Login
+
+| Method | Endpoint   | Data Sent (Required) | Data Sent (Optional) | Data Returned      |
+| ------ | ---------- | -------------------- | -------------------- | ------------------ |
+| POST   | /api/login | username, password   | n/a                  | JSON Web Token\*\* |
+
+When a login request is made, the server will check if the username exists, and if so, if the password is correct. When an incorrect username is provided, the server returns the a 401 error with the message `User does not exist, check username and try again.`. When an incorrect password is provided, the error 401 is returned with the message `User provided incorrect password.`. If the server encounters an error, the error code 500 is returned along with an object containing a message and specific error.
+
+\*\*A successful login receives an object with a welcome message and a JSON Web Token. The decrypted token will look so:
+`{ "sub": 11, "username": "harry_potter", "first_name": "Harry", "last_name": "Potter", "role": "student", "iat": 1573928017281, "exp": 1573928053281 }`

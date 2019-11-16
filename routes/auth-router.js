@@ -11,7 +11,7 @@ router.post('/', (req, res) => {
 
   Users.findBy({ username })
     .then(user => {
-      console.log(`user in findBy in login POST req`, user)
+      // console.log(`user in findBy in login POST req`, user)
       if (!user) {
         res.status(401).json({
           message: 'User does not exist, check username and try again.'
