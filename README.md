@@ -94,7 +94,11 @@ When one of the above tests fail the server will send back an object with a mess
 | ------ | ---------- | -------------------- | -------------------- | ------------------ |
 | POST   | /api/login | username, password   | n/a                  | JSON Web Token\*\* |
 
-When a login request is made, the server will check if the username exists, and if so, if the password is correct. When an incorrect username is provided, the server returns the a 401 error with the message `User does not exist, check username and try again.`. When an incorrect password is provided, the error 401 is returned with the message `User provided incorrect password.`. If the server encounters an error, the error code 500 is returned along with an object containing a message and specific error.
+When a login request is made, the server will check if the username exists, and if so, whether the password is correct.
+
+- When an incorrect username is provided, the server returns the a 401 error with the message `User does not exist, check username and try again.`.
+- When an incorrect password is provided, the error 401 is returned with the message `User provided incorrect password.`.
+- If the server encounters an error, the error code 500 is returned along with an object containing a message and specific error.
 
 \*\*Upon successful login, the server returns an object with a welcome message and a JSON Web Token. The decrypted token will look so:
 `{ "sub": 11, "username": "harry_potter", "first_name": "Harry", "last_name": "Potter", "role": "student", "iat": 1573928017281, "exp": 1573928053281 }`
