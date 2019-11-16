@@ -60,8 +60,9 @@ Postgres will be adopted during deployment.
 |  username | varchar  |   yes| yes  |
 |   first_name|  varchar | no  | no  |
 |  last_name | varchar  |  no |  no |
-|  role | varchar  |  yes |  no |
+|  role** | varchar  |  yes |  no |
 
-Data in `users` will initially be seeded with filler data.
+Data in `users` will initially be seeded with filler data. 
+**Role is expected to be either `instructor` or `student`.
 
 ##Endpoints
