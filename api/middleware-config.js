@@ -5,7 +5,7 @@ const morgan = require('morgan');
 
 module.exports = server => {
   server.use(helmet());
-  server.use(express.json());
   server.use(cors());
   server.use(morgan());
+  server.use(express.json());
 };
