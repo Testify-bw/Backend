@@ -31,7 +31,7 @@ function add(user) {
     .insert(user)
     .then(ids => {
       const [id] = ids;
-      findById(id)
+      return findById(id)
     })
 }
 

@@ -14,8 +14,9 @@ router.post('/', (req, res) => {
     user.password = hash;
 
     Users.add(user)
-      .then(saved => {
-        res.status(201).json(saved);
+      .then(user => {
+        console.log(`user in response from registration POST`, user)
+        res.status(201).json(user);
       })
       .catch(err => {
         res.status(500).json({

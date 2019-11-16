@@ -66,3 +66,16 @@ Data in `users` will initially be seeded with filler data.
 **Role is expected to be either `instructor` or `student`.
 
 ##Endpoints
+###Registration
+| Method | Endpoint   | Data Sent (Required)| Data Sent  (Optional)  | Data Received  |
+|---|---|---|---|---|
+| POST  |  /api/register | username, password, rolle  | first_name, last_name   | object id, username, first_name, last_name, role  |
+
+When the API recieves a user, it will run checks 
+
+- to verify that the username meets a minimum length and contains no spaces, 
+- to verify that the password meets a minimum length
+- to verify that the role is either `student` or `instructor`
+
+When one of the above tests fail, the server will send back an object with a message property which describes that an error has taken place. The second property of the object is an array containing error messages for the failed tests. For example, when a user attempts to register an account with no role specified, the server returns the following object: `{message: 'Invalid registration information was provided, see errors for details.', 
+	errors: ['Role must be 'student' or 'instructor.']`

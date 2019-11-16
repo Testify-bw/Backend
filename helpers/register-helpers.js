@@ -7,6 +7,8 @@ const validRoles = [`student`, `instructor`];
 function validateRegistration(user) {
   let errors = [];
 
+  // add test to push error when username has space
+
   if (!user.username || user.username.length < 4) {
 
     errors.push(`Username must be longer than 4 characters`)
@@ -24,4 +26,5 @@ function validateRegistration(user) {
     isSuccessful: errors.length > 0 ? false : true,
     errors
   }
-}
+};
+
