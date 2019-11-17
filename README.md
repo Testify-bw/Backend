@@ -121,4 +121,4 @@ Header Configuration:
 Each entry in an array represents a user and will look so:
 `{ id, username, first_name, last_name, role, classes** }`
 
-\*\* As soon as class lists are implemented in the database, an array of classes the user is associated with will be returned inside the.
+\*\* As soon as class lists are implemented in the database, an array of classes the user is associated with will be returned inside the user object.
