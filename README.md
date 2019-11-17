@@ -72,13 +72,17 @@ Data in `users` will initially be seeded with filler data.
 
 \*\*Role is expected to be either `instructor` or `student`.
 
+# API
+
+This API is hosted at https://bw-testify.herokuapp.com
+
 ## Endpoints
 
 ### Registration
 
-| Method | Endpoint                                      | Data Sent (Required)     | Data Sent (Optional)  | Data Returned                                    |
-| ------ | --------------------------------------------- | ------------------------ | --------------------- | ------------------------------------------------ |
-| POST   | https://bw-testify.herokuapp.com/api/register | username, password, role | first_name, last_name | object id, username, first_name, last_name, role |
+| Method | Endpoint      | Data Sent (Required)     | Data Sent (Optional)  | Data Returned                                    |
+| ------ | ------------- | ------------------------ | --------------------- | ------------------------------------------------ |
+| POST   | /api/register | username, password, role | first_name, last_name | object id, username, first_name, last_name, role |
 
 When the API recieves a user, it will run checks
 
@@ -90,9 +94,9 @@ When one of the above tests fail the server will send back an object with a mess
 
 ### Login
 
-| Method | Endpoint                                   | Data Sent (Required) | Data Sent (Optional) | Data Returned      |
-| ------ | ------------------------------------------ | -------------------- | -------------------- | ------------------ |
-| POST   | https://bw-testify.herokuapp.com/api/login | username, password   | n/a                  | JSON Web Token\*\* |
+| Method | Endpoint   | Data Sent (Required) | Data Sent (Optional) | Data Returned      |
+| ------ | ---------- | -------------------- | -------------------- | ------------------ |
+| POST   | /api/login | username, password   | n/a                  | JSON Web Token\*\* |
 
 When a login request is made, the server will check if the username exists, and if so, whether the password is correct.
 
@@ -102,3 +106,19 @@ When a login request is made, the server will check if the username exists, and 
 
 \*\*Upon successful login, the server returns an object with a welcome message and a JSON Web Token. The decrypted token will look so:
 `{ "sub": 11, "username": "harry_potter", "first_name": "Harry", "last_name": "Potter", "role": "student", "iat": 1573928017281, "exp": 1573928053281 }`
+
+### Retrieving Users
+
+| method | Endpoint               | Data Sent | Data Returned            |
+| ------ | ---------------------- | --------- | ------------------------ |
+| GET    | /api/users             | JWT Token | Array of all users       |
+| GET    | /api/users/instructors | JWT Token | Array of all instructors |
+| GET    | /api/users/students    | JWT Token | Array of all students    |
+
+Header Configuration:
+`{ Content-Type: 'application/json', Authorization: token }`
+
+Each entry in an array represents a user and will look so:
+`{ id, username, first_name, last_name, role, classes** }`
+
+\*\* As soon as class lists are implemented in the database, an array of classes the user is associated with will be returned inside the.
