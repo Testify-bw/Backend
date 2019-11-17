@@ -4,12 +4,14 @@ const db = require('../data/db-config');
 module.exports = {
   find,
   findBy,
+  findAllBy,
   findById,
-  add
+  add,
 }
 
 function find() {
   return db('users')
+    // add class relation once table is created
     .select('id', 'username', 'first_name', 'last_name', 'role')
 }
 
@@ -17,6 +19,12 @@ function findBy(filter) {
   return db('users')
     .where(filter)
     .first()
+}
+
+function findAllBy(filter) {
+  return db('users')
+    .select('id', 'username', 'first_name', 'last_name', 'role')
+    .where(filter)
 }
 
 function findById(id) {

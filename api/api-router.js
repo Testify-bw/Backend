@@ -6,6 +6,7 @@ const userRouter = require('../routes/user-router');
 // all urls are prepended with /api
 router.use('/register', registerRouter);
 router.use('/login', authRouter)
+router.use('/users', userRouter)
 
 
 router.get('/', (req, res) => {
