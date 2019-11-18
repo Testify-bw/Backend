@@ -4,6 +4,7 @@ exports.up = function (knex) {
     tbl.increments();
     tbl
       .varchar('choice', 255)
+      .notNullable()
     tbl
       .integer('question_id', 255)
       .unsigned()
