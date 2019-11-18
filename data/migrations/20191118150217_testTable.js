@@ -7,9 +7,15 @@ exports.up = function (knex) {
       .notNullable()
     tbl
       .integer('test_length', 255)
+    tbl
+      .integer('author_id', 255)
+      .unsigned()
+      .references('id')
+      .onTable('users')
+      .onDelete('cascade')
   })
 };
 
 exports.down = function (knex) {
-  return knex.schema.dropTableIfExists('tests')
+  return knex.schema.dropTableIfExists('tests');
 };
