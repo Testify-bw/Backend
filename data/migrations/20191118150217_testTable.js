@@ -8,6 +8,12 @@ exports.up = function (knex) {
     tbl
       .integer('test_length', 255)
     tbl
+      .integer('class_id', 255)
+      .unsigned()
+      .references('id')
+      .inTable('users')
+      .onDelete('cascade')
+    tbl
       .integer('author_id', 255)
       .unsigned()
       .references('id')
