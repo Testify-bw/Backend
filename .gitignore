@@ -103,8 +103,6 @@ dist
 # TernJS port file
 .tern-port
 
-#database file
-.db3
 
 #yarn lock file
 .lock
