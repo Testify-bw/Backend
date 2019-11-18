@@ -11,7 +11,7 @@ exports.up = function (knex) {
       .integer('author_id', 255)
       .unsigned()
       .references('id')
-      .onTable('users')
+      .inTable('users')
       .onDelete('cascade')
   })
 };
