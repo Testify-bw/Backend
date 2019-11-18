@@ -2,8 +2,8 @@
 exports.up = function(knex) {
   return knex.schema.createTable("user-classes", table => {
       table.increments();
-      table.integer("user_id").notNullable().references("users");
-      table.integer("class_id").notNullable().references("classes");
+      table.integer("user_id").unsigned().notNullable().references("id").inTable("users").onDelete('cascade');
+      table.integer("class_id").unsigned().notNullable().references("id").inTable("classes").onDelete('cascade');
   });
 };
 
