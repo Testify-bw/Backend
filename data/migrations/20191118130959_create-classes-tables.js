@@ -1,8 +1,8 @@
 
 exports.up = function (knex) {
-  return knex.schema.createTable("classes", table => {
+  return knex.schema.createTable("classes", tbl => {
     tbl.increments('id');
-    table.string("class_name", 128).unique().notNullable();
+    tbl.string("class_name", 128).unique().notNullable();
   })
 };
 
