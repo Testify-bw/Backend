@@ -3,6 +3,9 @@ exports.up = function (knex) {
   return knex.schema.createTable('test_questions', tbl => {
     tbl.increments();
     tbl
+      .boolean('short_answer')
+      .notNullable()
+    tbl
       .integer('test_id', 255)
       .unsigned()
       .references('id')
