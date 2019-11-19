@@ -14,7 +14,6 @@ exports.up = function (knex) {
     tbl
       .varchar('question_text', 255)
       .notNullable()
-
   })
 };
 
