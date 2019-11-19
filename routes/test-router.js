@@ -2,7 +2,7 @@ const requireValidToken = require("../middleware/requireValidToken");
 const testRouter = require("express").Router();
 const testModel = require("../models/test-model");
 
-testRouter.get("/:id",/* requireValidToken,*/ (req, res) => {
+testRouter.get("/:id", requireValidToken, (req, res) => {
     testModel.findQuestionsByTestId(1);
 
     testModel.findTestById(req.params.id)
