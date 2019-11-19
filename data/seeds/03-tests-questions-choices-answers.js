@@ -92,11 +92,11 @@ exports.seed = function (knex) {
               choice: 'Hotdog'
             },
             {
-              question_id: 2,
+              question_id: 3,
               choice: 'true'
             },
             {
-              question_id: 2,
+              question_id: 3,
               choice: 'false'
             },
             // react options
