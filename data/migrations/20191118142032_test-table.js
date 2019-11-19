@@ -1,15 +1,27 @@
 
-exports.up = function(knex) {
-  return knex.schema.createTable("student_submissions", table => {
-    table.increments();
-    table.integer("student_id").unsigned().notNullable().references("id").inTable("users").onDelete('cascade');
-    table.integer("test_id").unsigned().notNullable().references("id").inTable("tests").onDelete('cascade');
-    table.integer("submission_number");
-    table.timestamp("created_at").defaultTo(knex.fn.now());
-    table.float("percent_correct", {precision: 2}).notNullable();
-  });
+exports.up = function (knex) {
+  return knex.schema.createTable('tests', tbl => {
+    tbl.increments('id');
+    tbl
+      .varchar('test_name', 255)
+      .notNullable()
+    tbl
+      .integer('test_length', 255)
+    tbl
+      .integer('class_id', 255)
+      .unsigned()
+      .references('id')
+      .inTable('classes')
+      .onDelete('cascade')
+    tbl
+      .integer('author_id', 255)
+      .unsigned()
+      .references('id')
+      .inTable('users')
+      .onDelete('cascade')
+  })
 };
 
-exports.down = function(knex) {
-  return knex.schema.dropTableIfExists("student_submissions");
+exports.down = function (knex) {
+  return knex.schema.dropTableIfExists('tests');
 };
