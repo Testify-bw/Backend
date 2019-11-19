@@ -27,55 +27,55 @@ exports.seed = function (knex) {
         .then(() => {
           return knex('submitted_answers').insert([
             {
-              qustion_id: 1,
+              question_id: 1,
               submission_id: 1,
               answer: 'Hotdog',
               is_correct: true
             },
             {
-              qustion_id: 2,
+              question_id: 2,
               submission_id: 1,
               answer: 'Luck',
               is_correct: true
             },
             {
-              qustion_id: 3,
+              question_id: 3,
               submission_id: 1,
               answer: 'false',
               is_correct: true
             },
             {
-              qustion_id: 1,
+              question_id: 1,
               submission_id: 2,
               answer: 'Ashwinder Egg',
               is_correct: false
             },
             {
-              qustion_id: 2,
+              question_id: 2,
               submission_id: 2,
               answer: 'Courage',
               is_correct: false
             },
             {
-              qustion_id: 3,
+              question_id: 3,
               submission_id: 2,
               answer: 'true',
               is_correct: false
             },
             {
-              qustion_id: 1,
+              question_id: 1,
               submission_id: 3,
               answer: 'Hotdog',
               is_correct: true
             },
             {
-              qustion_id: 2,
+              question_id: 2,
               submission_id: 3,
               answer: 'Deduction',
               is_correct: false
             },
             {
-              qustion_id: 3,
+              question_id: 3,
               submission_id: 3,
               answer: 'false',
               is_correct: false
