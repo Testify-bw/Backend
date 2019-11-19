@@ -2,7 +2,7 @@
 
 exports.up = function (knex) {
   return knex.schema.createTable("student_submissions", table => {
-    tbl.increments('id');
+    table.increments('id');
     table.integer("student_id").unsigned().notNullable().references("id").inTable("users").onDelete('cascade');
     table.integer("test_id").unsigned().notNullable().references("id").inTable("tests").onDelete('cascade');
     table.integer("submission_number");
