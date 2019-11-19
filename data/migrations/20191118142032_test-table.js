@@ -1,7 +1,7 @@
 
 exports.up = function (knex) {
   return knex.schema.createTable('tests', tbl => {
-    tbl.increments();
+    tbl.increments('id');
     tbl
       .varchar('test_name', 255)
       .notNullable()
@@ -11,7 +11,7 @@ exports.up = function (knex) {
       .integer('class_id', 255)
       .unsigned()
       .references('id')
-      .inTable('users')
+      .inTable('classes')
       .onDelete('cascade')
     tbl
       .integer('author_id', 255)
