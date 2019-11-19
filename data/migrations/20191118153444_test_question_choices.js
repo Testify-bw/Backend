@@ -1,7 +1,7 @@
 
 exports.up = function (knex) {
   return knex.schema.createTable('question_choices', tbl => {
-    tbl.increments();
+    tbl.increments('id');
     tbl
       .varchar('choice', 255)
       .notNullable()
