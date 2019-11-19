@@ -148,7 +148,7 @@ exports.seed = function (knex) {
           ])
         })
         .then(() => {
-          return knex('test_question_answer')([
+          return knex('test_question_answer').insert([
             {
               question_id: 1,
               correct_answer: 'Hotdog'
