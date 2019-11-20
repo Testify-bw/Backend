@@ -1,13 +1,6 @@
 const db = require("../data/db-config");
 
-module.exports = {
-    findTestById,
-    findUserTestsById,
-    insertTest,
-    insertChoices,
-    insertAnswer
 
-}
 const findTestById = id => {
     return db("tests")
     .select("test_name", "question_text", "short_answer", "choice", "test_questions.id as question_id", "correct_answer")
@@ -89,4 +82,12 @@ function insertAnswer(answer, id) {
     return db('test_question_answer')
         .insert(answerEntry)
         .then(console.log(answerEntry, `submitted`))
+}
+
+module.exports = {
+    findTestById,
+    findUserTestsById,
+    insertTest,
+    insertChoices,
+    insertAnswer
 }
