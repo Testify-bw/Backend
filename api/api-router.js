@@ -9,7 +9,7 @@ const submissionsRouter = require('../routes/submission-router');
 router.use('/register', registerRouter);
 router.use('/login', authRouter);
 router.use('/users', userRouter);
-router.use("/tests", testRouter);
+router.use("/users", testRouter);
 router.use('/submissions', submissionsRouter);
 // submissionsRouter
 // classesRouter

@@ -3,7 +3,7 @@ const testRouter = require("express").Router();
 const testModel = require("../models/test-model");
 const ensureUserHasTest = require("../middleware/ensureUserHasTest");
 
-testRouter.get("/:id", [requireValidToken, ensureUserHasTest], (req, res) => {
+testRouter.get("test/:id", [requireValidToken, ensureUserHasTest], (req, res) => {
     testModel.findTestById(req.params.id)
         .then(test => {
             if (!test) {
@@ -39,7 +39,7 @@ testRouter.get("/:id", [requireValidToken, ensureUserHasTest], (req, res) => {
         });
 });
 
-testRouter.get("/users/:id", (req, res) => {
+testRouter.get("/:id/tests", (req, res) => {
     testModel.findUserTestsById(req.params.id)
         .then(tests => {
             res.status(200).json(tests);
@@ -50,7 +50,7 @@ testRouter.get("/users/:id", (req, res) => {
         });
 });
 
-testRouter.post('/add', requireValidToken, (req, res) => {
+testRouter.post('test/add', requireValidToken, (req, res) => {
     const submission = req.body;
     testModel.insertTest(submission)
         .then(test => {
@@ -94,21 +94,21 @@ testRouter.put('/test/question/:id', [requireValidToken, ensureUserHasTest], (re
         })
 });
 
-testRouter.post('/test/:test-id/submit-answers', [requireValidToken, ensureUserHasTest], (req, res) => {
-    const submission = {
-        ...req.body,
-        test_id: req.params.test - id
-    }
-    testModel.insertStudentSubmission(submission)
-        .then(submission => {
-            res.status(200).json(submission)
-        })
-        .catch(err => {
-            res.status(500).json({
-                message: `Error retrieving list of users from the database.`,
-                error: err.toString()
-            });
-        })
-})
+// testRouter.post('/test/:test-id/submit-answers', [requireValidToken, ensureUserHasTest], (req, res) => {
+//     const submission = {
+//         ...req.body,
+//         test_id: req.params.test - id
+//     }
+//     testModel.insertStudentSubmission(submission)
+//         .then(submission => {
+//             res.status(200).json(submission)
+//         })
+//         .catch(err => {
+//             res.status(500).json({
+//                 message: `Error retrieving list of users from the database.`,
+//                 error: err.toString()
+//             });
+//         })
+// })
 
 module.exports = testRouter;
