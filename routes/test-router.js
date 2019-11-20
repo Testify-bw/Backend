@@ -20,7 +20,8 @@ testRouter.get("/:id", [requireValidToken, ensureUserHasTest], (req, res) => {
                 questions.push({
                             question_text: item.question_text,
                             short_answer: item.short_answer,
-                            choices: item.choice ? [item.choice] : []
+                            choices: item.choice ? [item.choice] : [],
+                            answer: req.decodedJwt.role === "instructor" ? item.correct_answer : null
                         });
             } else {
                 questions[questions.length - 1].choices.push(item.choice);
