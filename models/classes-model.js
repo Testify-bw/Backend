@@ -1,7 +1,9 @@
 const db = require('../data/db-config');
 
 module.exports = {
-  get
+  get,
+  getById,
+  add
 }
 
 function get() {
