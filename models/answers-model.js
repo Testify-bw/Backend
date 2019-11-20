@@ -10,22 +10,22 @@ module.exports = {
 }
 
 function get() {
-  return db('answers')
+  return db('question_answers')
 }
 
 function getById(id) {
-  return db('answers')
+  return db('question_answers')
     .where('id', id)
 }
 
 function getByTest(test_id) {
-  return db('answers')
+  return db('question_answers')
     .where('test_id', id)
 }
 
 
 function add(answer) {
-  return db('answers')
+  return db('question_answers')
     .insert(answer, 'id')
     .then(ids => {
       const [id] = ids;
@@ -34,13 +34,13 @@ function add(answer) {
 }
 
 function remove(id) {
-  return db('answers')
+  return db('question_answers')
     .where('id', id)
     .del()
 }
 
 function update(id, changes) {
-  return db('answers')
+  return db('question_answers')
     .where('id', id)
     .update(changes)
     .then(() => {
