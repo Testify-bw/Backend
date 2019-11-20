@@ -5,49 +5,63 @@ const ensureUserHasTest = require("../middleware/ensureUserHasTest");
 
 testRouter.get("/:id", [requireValidToken, ensureUserHasTest], (req, res) => {
     testModel.findTestById(req.params.id)
-    .then(test => {
-        if(!test) {
-            res.status(404).json({message: "no test found with that id"})
-            return;
-        }
-
-        const questions = [];
-
-        test.forEach((item, idx) => {
-            const lastItem = test[idx - 1];
-
-            if(idx === 0 || item.question_id !== lastItem.question_id) {
-                questions.push({
-                            question_text: item.question_text,
-                            short_answer: item.short_answer,
-                            choices: item.choice ? [item.choice] : []
-                        });
-            } else {
-                questions[questions.length - 1].choices.push(item.choice);
+        .then(test => {
+            if (!test) {
+                res.status(404).json({ message: "no test found with that id" })
+                return;
             }
-        });
 
-        res.status(200).json({
-            name: test[0].test_name,
-            questions: questions
-       });     
-    })    
-    .catch(error => {
-        console.log(error);
-        res.status(500).json({message: "could not retrieve test"})
-    });
+            const questions = [];
+
+            test.forEach((item, idx) => {
+                const lastItem = test[idx - 1];
+
+                if (idx === 0 || item.question_id !== lastItem.question_id) {
+                    questions.push({
+                        question_text: item.question_text,
+                        short_answer: item.short_answer,
+                        choices: item.choice ? [item.choice] : []
+                    });
+                } else {
+                    questions[questions.length - 1].choices.push(item.choice);
+                }
+            });
+
+            res.status(200).json({
+                name: test[0].test_name,
+                questions: questions
+            });
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({ message: "could not retrieve test" })
+        });
 });
 
 testRouter.get("/users/:id", (req, res) => {
     testModel.findUserTestsById(req.params.id)
-    .then(tests => {
-        res.status(200).json(tests);
-    })
-    .catch(error => {
-        console.log(error);
-        res.status(500).json({message: "could not retrieve user's tests"});
-    });
+        .then(tests => {
+            res.status(200).json(tests);
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({ message: "could not retrieve user's tests" });
+        });
 });
+
+testRouter.post('/add', requireValidToken, (req, res) => {
+    const submission = req.body;
+    testModel.insertTest(submission)
+        .then(test => {
+            res.status(200).json(test)
+        })
+        .catch(err => {
+            res.status(500).json({
+                message: `Error retrieving list of users from the database.`,
+                error: err.toString()
+            });
+        })
+})
 
 module.exports = testRouter;
 
