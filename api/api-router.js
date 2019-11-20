@@ -9,7 +9,9 @@ router.use('/register', registerRouter);
 router.use('/login', authRouter);
 router.use('/users', userRouter);
 router.use("/tests", testRouter);
-
+// questionsRouter
+// submissionsRouter
+// classesRouter
 
 router.get('/', (req, res) => {
   res.json({ api: 'You are connected to the API.' });
