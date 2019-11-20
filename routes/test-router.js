@@ -50,5 +50,19 @@ testRouter.get("/users/:id", (req, res) => {
     });
 });
 
+testRouter.post('/add', requireValidToken, (req, res) => {
+    const submission = req.body;
+    testModel.insertTest(submission)
+        .then(test => {
+            res.status(200).json(test)
+        })
+        .catch(err => {
+            res.status(500).json({
+                message: `Error retrieving list of users from the database.`,
+                error: err.toString()
+            });
+        })
+})
+
 module.exports = testRouter;
 
