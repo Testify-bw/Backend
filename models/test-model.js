@@ -42,7 +42,7 @@ function insertTest(submission) {
                     test_id: id
                 }
                 console.log(`inserting newQuestion`, newQuestion)
-                return db('test_questions')
+                db('test_questions')
                     .insert(newQuestion, 'id')
                     // insert options
                     .then(ids => {
@@ -85,5 +85,5 @@ function insertAnswer(answer, id) {
     console.log(`inserting answerEntry`, answerEntry)
     return db('test_question_answer')
         .insert(answerEntry)
-        .then()
+        .then(console.log(answerEntry, `submitted`))
 }
