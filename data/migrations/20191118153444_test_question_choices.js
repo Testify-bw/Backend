@@ -9,7 +9,7 @@ exports.up = function (knex) {
       .integer('question_id', 255)
       .unsigned()
       .references('id')
-      .inTable('test_questions')
+      .inTable('questions')
       .onDelete('cascade')
       .onUpdate('cascade')
   })
