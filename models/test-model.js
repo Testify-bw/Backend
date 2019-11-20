@@ -22,10 +22,11 @@ function findUserTestsById(id) {
 }
 function insertTest(submission) {
     console.log(`insertTest submission`, submission);
-    const { test_name, author_id, questions } = submission
+    const { test_name, author_id, questions, class_id } = submission
     const test = {
         test_name,
-        author_id
+        author_id,
+        class_id
     }
     console.log(`test object`, test);
 
@@ -35,16 +36,17 @@ function insertTest(submission) {
         .then(ids => {
             const [id] = ids
             // add questions
+
             questions.map(question => {
                 console.log(`mapped question`, question)
-                const { short_answer, question_text, question_choices } = question
+                const { short_answer, text, question_choices } = question
                 let newQuestion = {
                     short_answer,
-                    question_text,
+                    text,
                     test_id: id
                 }
                 console.log(`inserting newQuestion`, newQuestion)
-                db('test_questions')
+                db('questions')
                     .insert(newQuestion, 'id')
                     // insert options
                     .then(ids => {
@@ -61,7 +63,7 @@ function insertTest(submission) {
 
                     })
             })
-            return findTestById(id)
+                .then(() => { return findTestById(id) })
         })
 }
 
@@ -73,7 +75,7 @@ function insertChoices(choices, id) {
             question_id: id
         };
         console.log(`inserting choiceEntry`, choiceEntry)
-        db('choices')
+        db('question_choices')
             .insert(choiceEntry)
             .then()
     })
@@ -85,7 +87,7 @@ function insertAnswer(answer, id) {
         question_id: id
     };
     console.log(`inserting answerEntry`, answerEntry)
-    return db('question_answer')
+    return db('question_answers')
         .insert(answerEntry)
         .then(console.log(answerEntry, `submitted`))
 }
