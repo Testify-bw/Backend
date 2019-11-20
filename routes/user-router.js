@@ -21,7 +21,7 @@ router.get('/', requireValidToken, (req, res) => {
 });
 
 // get users by role
-router.get('/:role', requireValidToken, (req, res) => {
+router.get('/roles/:role', requireValidToken, (req, res) => {
   let role = req.params.role;
   console.log(`getting users by role`, role)
   Users.findAllBy({ role })
@@ -35,5 +35,19 @@ router.get('/:role', requireValidToken, (req, res) => {
       });
     });
 });
+
+router.get('/classes', requireValidToken, (req, res) => {
+  const { id } = req.params;
+  Users.getUserClasses(id)
+    .then(classes => {
+      res.status(200).json(classees)
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: `Error retrieving list of classes from the database.`,
+        error: err.toString()
+      });
+    })
+})
 
 module.exports = router;

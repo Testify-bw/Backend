@@ -4,13 +4,17 @@ Initialize this project with the command `npm i`.
 
 package.json includes the following dependencies:
 
-- express
-- morgan
-- bcryptjs
-- dotenv
-- helmet
-- knex
-- sqlite3
+### Dependencies
+
+| Dependencies | dev Dependencies |
+| ------------ | ---------------- |
+| express      | cross-env        |
+| morgan       | jest             |
+| bcryptjs     | nodemon          |
+| dotenv       | supertest        |
+| knex         |                  |
+| sqlite3      |                  |
+| pg           |                  |
 
 and dev dependencies
 
@@ -122,3 +126,34 @@ Each entry in an array represents a user and will look so:
 `{ id, username, first_name, last_name, role, classes** }`
 
 \*\* As soon as class lists are implemented in the database, an array of classes the user is associated with will be returned inside the user object.
+
+### Adding a Test
+
+| method | Endpoint            | Data Sent               | Data Returned           |
+| ------ | ------------------- | ----------------------- | ----------------------- |
+| GET    | /api/users/test/:id | test_id                 | Object containing test. |
+| POST   | /api/users/test/add | Object containing test  | n/a                     |
+| PUT    | wip                 | id, object with changes | n/a                     |
+| DEL    | wip                 | id                      | n/a                     |
+
+#### Updating Test Questions
+
+| method | Endpoint       | Data Sent                        | Data Returned |
+| ------ | -------------- | -------------------------------- | ------------- |
+| PUT    | /questions/:id | question_id, object with changes | n/a           |
+| DEL    | /questions/:id | question_id                      | Data Returned |
+
+#### Updating Test Answers
+
+| method | Endpoint     | Data Sent                      | Data Returned |
+| ------ | ------------ | ------------------------------ | ------------- |
+| PUT    | /answers/:id | answer_id, object with changes | n/a           |
+| DEL    | /answers/:id | answer_id                      | Data Returned |
+
+### Adding Submission
+
+| method | Endpoint               | Data Sent                                   | Data Returned |
+| ------ | ---------------------- | ------------------------------------------- | ------------- |
+| POST   | /users/test/answer/:id | test object containing array of answers\*\* | n/a           |
+
+\*\*Must have same structure
