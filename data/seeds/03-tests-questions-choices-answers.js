@@ -23,53 +23,53 @@ exports.seed = function (knex) {
       ])
 
         .then(() => {
-          return knex('test_questions').insert([
+          return knex('questions').insert([
             //postions quiz questions
             {
               test_id: 1,
-              question_text: 'What is not an ingredient of felix felicis?',
+              text: 'What is not an ingredient of felix felicis?',
               short_answer: false
             },
             {
               test_id: 1,
-              question_text: 'The common name of Felix Filicis is Liquid ____',
+              text: 'The common name of Felix Filicis is Liquid ____',
               short_answer: true
             },
             {
               test_id: 1,
-              question_text: 'Felix Filicis has an infinite duration.',
+              text: 'Felix Filicis has an infinite duration.',
               short_answer: false
             },
             // react questions
             {
               test_id: 2,
-              question_text: 'Which of these is not a feature of Reaect?',
+              text: 'Which of these is not a feature of Reaect?',
               short_answer: false
             },
             {
               test_id: 2,
-              question_text: 'The useEffect hook requires this to avoid constant re-renders.',
+              text: 'The useEffect hook requires this to avoid constant re-renders.',
               short_answer: true
             },
             {
               test_id: 2,
-              question_text: 'Redux is the superior state management library.',
+              text: 'Redux is the superior state management library.',
               short_answer: false
             },
             // calculus questions
             {
               test_id: 3,
-              question_text: 'What is an example of an infinitesimal?',
+              text: 'What is an example of an infinitesimal?',
               short_answer: false
             },
             {
               test_id: 3,
-              question_text: 'What is the Differential Calculus process of finding the derivative called?',
+              text: 'What is the Differential Calculus process of finding the derivative called?',
               short_answer: true
             },
             {
               test_id: 3,
-              question_text: 'Calculus was developed by Isaac Newton and Gottfried Wilhhelm Leibniz independently of one another.',
+              text: 'Calculus was developed by Isaac Newton and Gottfried Wilhhelm Leibniz independently of one another.',
               short_answer: false
             }
           ])
@@ -148,7 +148,7 @@ exports.seed = function (knex) {
           ])
         })
         .then(() => {
-          return knex('test_question_answer').insert([
+          return knex('question_answers').insert([
             {
               question_id: 1,
               correct_answer: 'Hotdog'
