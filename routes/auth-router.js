@@ -24,6 +24,7 @@ router.post('/', (req, res) => {
           token
         });
       } else {
+        console.log("user: ", password, user.password)
         res.status(401).json({ message: `User provided incorrect password.` })
       }
     })
