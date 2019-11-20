@@ -3,7 +3,7 @@ const testRouter = require("express").Router();
 const testModel = require("../models/test-model");
 const ensureUserHasTest = require("../middleware/ensureUserHasTest");
 
-testRouter.get("test/:id", [requireValidToken, ensureUserHasTest], (req, res) => {
+testRouter.get("/test/:id", [requireValidToken, ensureUserHasTest], (req, res) => {
     testModel.findTestById(req.params.id)
         .then(test => {
             if (!test) {
