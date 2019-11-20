@@ -4,7 +4,8 @@ module.exports = {
     findTestById,
     findUserTestsById,
     insertTest,
-    updateAnswer
+    updateAnswer,
+    insertStudentSubmission
 }
 
 function findTestById(id) {
