@@ -1,24 +1,20 @@
 const db = require("../data/db-config");
 
-module.exports = {
-    findTestById,
-    findUserTestsById,
-    insertTest,
-    // updateAnswer,
-    // insertStudentSubmission
-}
 
-function findTestById(id) {
+const findTestById = id => {
     return db("tests")
-        .select("test_name", "text", "short_answer", "choice", "question_id")
-        .join("questions", "tests.id", "test_id")
-        .leftJoin("question_choices", "questions.id", "question_id")
-        .where({ "tests.id": id });
+
+    .select("test_name", "question_text", "short_answer", "choice", "test_questions.id as question_id", "correct_answer")
+    .join("test_questions", "tests.id", "test_id")
+    .join("test_question_answer", "test_question_answer.question_id", "test_questions.id")
+    .leftJoin("question_choices", "test_questions.id", "question_choices.question_id")
+    .where({"tests.id": id});
+
 }
-function findUserTestsById(id) {
+const findUserTestsById = id => {
     return db("user_classes")
-        .join("tests", "tests.class_id", "user_classes.class_id")
-        .where({ user_id: id });
+    .join("tests", "tests.class_id", "user_classes.class_id")
+    .where({ user_id: id });
 }
 function insertTest(submission) {
     console.log(`insertTest submission`, submission);
@@ -92,6 +88,7 @@ function insertAnswer(answer, id) {
         .then(console.log(answerEntry, `submitted`))
 }
 
+
 // function updateAnswer(id, newAnswer) {
 
 //     return db('test_question_answer as a')
@@ -117,4 +114,13 @@ function insertAnswer(answer, id) {
 //             .join('tests', 'sub.test_id', 'tests.id')
 
 // }
+
+=======
+module.exports = {
+    findTestById,
+    findUserTestsById,
+    insertTest,
+    insertChoices,
+    insertAnswer
+}
 
