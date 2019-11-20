@@ -1,6 +1,6 @@
 
 exports.up = function (knex) {
-  return knex.schema.createTable('test_question_answer', tbl => {
+  return knex.schema.createTable('question_answers', tbl => {
     tbl.increments('id');
     tbl
       .varchar('correct_answer', 255)
@@ -11,9 +11,10 @@ exports.up = function (knex) {
       .references('id')
       .inTable('test_questions')
       .onDelete('cascade')
+      .onUpdate('cascade')
   })
 };
 
 exports.down = function (knex) {
-  return knex.schema.dropTableIfExists('test_question_answer')
+  return knex.schema.dropTableIfExists('question_answers')
 };

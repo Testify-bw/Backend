@@ -11,6 +11,7 @@ exports.up = function (knex) {
       .references('id')
       .inTable('test_questions')
       .onDelete('cascade')
+      .onUpdate('cascade')
   })
 };
 

@@ -1,8 +1,8 @@
 exports.up = function (knex) {
   return knex.schema.createTable("submitted_answers", table => {
     table.increments('id');
-    table.integer("question_id").unsigned().notNullable().references("id").inTable("test_questions").onDelete("cascade");
-    table.integer("submission_id").unsigned().notNullable().references("id").inTable("student_submissions").onDelete("cascade");
+    table.integer("question_id").unsigned().notNullable().references("id").inTable("test_questions").onDelete("cascade").onUpdate('cascade');
+    table.integer("submission_id").unsigned().notNullable().references("id").inTable("student_submissions").onDelete("cascade").onUpdate('cascade');
     table.string("answer", 128).notNullable();
     table.boolean("is_correct").notNullable();
   })
