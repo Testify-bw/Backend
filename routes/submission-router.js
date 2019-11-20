@@ -36,4 +36,19 @@ router.get('/:test_id', requireValidToken, (req, res) => {
 
 })
 
+// add student submission
+router.post('/', requireValidToken, (req, res) => {
+  const submission = req.body;
+  Submissions.insertStudentSubmission(submission)
+    .then(newSubmission => {
+      res.status(200).json(newSubmission)
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: `Error adding submission to the database.`,
+        error: err.toString()
+      });
+    })
+});
+
 module.exports = router;

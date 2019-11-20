@@ -4,8 +4,8 @@ module.exports = {
     findTestById,
     findUserTestsById,
     insertTest,
-    updateAnswer,
-    insertStudentSubmission
+    // updateAnswer,
+    // insertStudentSubmission
 }
 
 function findTestById(id) {
@@ -90,62 +90,29 @@ function insertAnswer(answer, id) {
         .then(console.log(answerEntry, `submitted`))
 }
 
-function updateAnswer(id, newAnswer) {
+// function updateAnswer(id, newAnswer) {
 
-    return db('test_question_answer as a')
-        .where('a.id', id)
-        .update({correct_answer: newAnswer})
-}
+//     return db('test_question_answer as a')
+//         .where('a.id', id)
+//         .update({correct_answer: newAnswer})
+// }
 
-function updateQuestion(id, newQuestion) {
-    return db ('test_questions as q')
-        .where('q.id', id)
-        .update(newQuestion)
-}
+// function updateQuestion(id, newQuestion) {
+//     return db ('test_questions as q')
+//         .where('q.id', id)
+//         .update(newQuestion)
+// }
 
-function insertStudentSubmission(submission) {
-// expect submission object to contain the student id and the test id and an array of answers
-const { student_id, test_id, answers} = submission;
-const submissionEntry = {
-    student_id,
-    test_id
-}
-    return db('student_submissions')
-        .insert(submissionEntry, 'id')
-        .then(ids => {
-            const [id] = ids;
-// iterate over array of answer objects
-            answers.map(entry => {
-                console.log(`mapped answer entry`, entry);
-                // deconstruct question_id and answer
-                const {question_id, answer} = entry;
-                // place q_id, submission_id, and answer in object to send to insertStudentAnswer
-                const submittedAnswer = {
-                    submission_id: id,
-                    question_id,
-                    answer: answer
-                }
-                insertStudentAnswer(submittedAnswer);
-            })
-        })
-}
 
-function insertStudentAnswer(submission) {
 
-    console.log(`inserting student answer`, submission)
-    return db('submitted_answer')
-        .insert(submission)
-        .then(console.log(submission, `submitted`))
-}
+// function getSubmissionsByStudent(id) {
+//     // shows username from users, test name from test, array of questions and answers
+//     let query = db('student_submissions as sub')
+//             .select('sub.id', 'sub.test_id', 'sub.submission_number', 'sub.submission_time', 'sub.student_id', 'users.username')
+//             .join('submitted_answer as ans', 'sub.id', 'ans.submission_id')
+//             .join('users', 'sub.student_id', 'users.id')
+//             .join('test_questions as tq', 'sub.test_id', 'tq.test_id' )
+//             .join('tests', 'sub.test_id', 'tests.id')
 
-function getSubmissionsByStudent(id) {
-    // shows username from users, test name from test, array of questions and answers
-    let query = db('student_submissions as sub')
-            .select('sub.id', 'sub.test_id', 'sub.submission_number', 'sub.submission_time', 'sub.student_id', 'users.username')
-            .join('submitted_answer as ans', 'sub.id', 'ans.submission_id')
-            .join('users', 'sub.student_id', 'users.id')
-            .join('test_questions as tq', 'sub.test_id', 'tq.test_id' )
-            .join('tests', 'sub.test_id', 'tests.id')
-
-}
+// }
 
