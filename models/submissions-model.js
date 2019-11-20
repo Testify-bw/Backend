@@ -53,3 +53,9 @@ function update(id, changes) {
       return getById(id)
     })
 }
+
+// returns each response for a submission
+function getResponsesBySubmission(sub_id) {
+  return db('submitted_answers as a')
+    .where('a.submission_id', sub_id)
+}
