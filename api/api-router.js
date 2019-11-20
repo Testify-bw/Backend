@@ -10,7 +10,7 @@ router.use('/register', registerRouter);
 router.use('/login', authRouter);
 router.use('/users', userRouter);
 router.use("/tests", testRouter);
-router.use('/submit', submissionsRouter);
+router.use('/submissions', submissionsRouter);
 // submissionsRouter
 // classesRouter
 

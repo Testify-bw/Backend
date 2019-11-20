@@ -10,9 +10,9 @@ module.exports = {
 
 function findTestById(id) {
     return db("tests")
-        .select("test_name", "question_text", "short_answer", "choice", "question_id")
-        .join("test_questions", "tests.id", "test_id")
-        .leftJoin("question_choices", "test_questions.id", "question_id")
+        .select("test_name", "text", "short_answer", "choice", "question_id")
+        .join("questions", "tests.id", "test_id")
+        .leftJoin("question_choices", "questions.id", "question_id")
         .where({ "tests.id": id });
 }
 function findUserTestsById(id) {
@@ -73,7 +73,7 @@ function insertChoices(choices, id) {
             question_id: id
         };
         console.log(`inserting choiceEntry`, choiceEntry)
-        db('question_choices')
+        db('choices')
             .insert(choiceEntry)
             .then()
     })
@@ -85,7 +85,7 @@ function insertAnswer(answer, id) {
         question_id: id
     };
     console.log(`inserting answerEntry`, answerEntry)
-    return db('test_question_answer')
+    return db('question_answer')
         .insert(answerEntry)
         .then(console.log(answerEntry, `submitted`))
 }

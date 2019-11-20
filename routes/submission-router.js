@@ -22,8 +22,8 @@ router.get('/:test_id', requireValidToken, (req, res) => {
 
   try {
     const { test_id } = req.params;
-    const submission = await Submissions.getByTest(test_id);
-    submission.responses = await Submissions.getResponsesBySubmission(submission.id)
+    const submission = Submissions.getByTest(test_id);
+    submission.responses = Submissions.getResponsesBySubmission(submission.id)
       .then(sub => {
         res.status(200).json(sub)
       })

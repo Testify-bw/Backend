@@ -49,7 +49,7 @@ testRouter.get("/users/:id", (req, res) => {
         });
 });
 
-testRouter.post('/add', [requireValidToken, ensureUserHasTest], (req, res) => {
+testRouter.post('/add', requireValidToken, (req, res) => {
     const submission = req.body;
     testModel.insertTest(submission)
         .then(test => {
@@ -67,37 +67,37 @@ testRouter.put('/test/answer/:id', [requireValidToken, ensureUserHasTest], (req,
     const newAnswer = req.body;
     const id = req.params.id
     testModel.updateAnswer(id, newAnswer)
-    .then(edit => {
-        res.status(200).json(edit)
-    })
-    .catch(err => {
-        res.status(500).json({
-            message: `Error retrieving list of users from the database.`,
-            error: err.toString()
-        });
-    })
+        .then(edit => {
+            res.status(200).json(edit)
+        })
+        .catch(err => {
+            res.status(500).json({
+                message: `Error retrieving list of users from the database.`,
+                error: err.toString()
+            });
+        })
 })
 
 testRouter.put('/test/question/:id', [requireValidToken, ensureUserHasTest], (req, res) => {
     const newQuestion = req.body;
     const id = req.params.id
     testModel.updateQuestion(id, newQuestion)
-    .then(edit => {
-        res.status(200).json(edit)
-    })
-    .catch(err => {
-        res.status(500).json({
-            message: `Error retrieving list of users from the database.`,
-            error: err.toString()
-        });
-    })
+        .then(edit => {
+            res.status(200).json(edit)
+        })
+        .catch(err => {
+            res.status(500).json({
+                message: `Error retrieving list of users from the database.`,
+                error: err.toString()
+            });
+        })
 });
 
 testRouter.post('/test/:test-id/submit-answers', [requireValidToken, ensureUserHasTest], (req, res) => {
     const submission = {
         ...req.body,
-    test_id: req.params.test-id
-     }
+        test_id: req.params.test - id
+    }
     testModel.insertStudentSubmission(submission)
         .then(submission => {
             res.status(200).json(submission)
