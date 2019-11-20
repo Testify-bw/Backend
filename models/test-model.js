@@ -137,3 +137,15 @@ function insertStudentAnswer(submission) {
         .insert(submission)
         .then(console.log(submission, `submitted`))
 }
+
+function getSubmissionsByStudent(id) {
+    // shows username from users, test name from test, array of questions and answers
+    let query = db('student_submissions as sub')
+            .select('sub.id', 'sub.test_id', 'sub.submission_number', 'sub.submission_time', 'sub.student_id', 'users.username')
+            .join('submitted_answer as ans', 'sub.id', 'ans.submission_id')
+            .join('users', 'sub.student_id', 'users.id')
+            .join('test_questions as tq', 'sub.test_id', 'tq.test_id' )
+            .join('tests', 'sub.test_id', 'tests.id')
+
+}
+
