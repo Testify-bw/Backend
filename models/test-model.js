@@ -4,25 +4,13 @@ module.exports = {
     findTestById: id => {
         return db("tests")
         .select("test_name", "question_text", "short_answer", "choice", "question_id")
-        // .select("test_name", "question_text", "short_answer")
-        .join("test_questions", "tests.id", "=", "test_id")
+        .join("test_questions", "tests.id", "test_id")
         .leftJoin("question_choices", "test_questions.id", "question_id")
         .where({"tests.id": id});
-        // .first();
-    }
-    ,
-    findQuestionsByTestId: testId => {
-        db("tests")
-        .select("test_name", "question_text", "short_answer")
-        // .select("test_name", "question_text", "short_answer")
-        .join("test_questions", "tests.id", "=", "test_id")
-        .join("question_choices", "question_id", "=", "test_questions.id")
-        .where({"tests.id": testId})
-        .then(q => console.log(q))
-    //     return db("test_questions")
-    //     .select("question_text", "short_answer", "choice")
-    //     .join("question_choices", "test_questions.id", "question_id")
-    //     .groupBy("test_questions.id")
-    //     .where({test_id: testId});
+    },
+    findUserTestsById: id => {
+        return db("user_classes")
+        .join("tests", "tests.class_id", "user_classes.class_id")
+        .where({user_id: id});
     }
 }
