@@ -69,5 +69,11 @@ testRouter.put('/test/answer/:id', [requireValidToken, ensureUserHasTest], (req,
     testModel.updateAnswer(id, newAnswer)
 })
 
+testRouter.put('/test/question/:id', [requireValidToken, ensureUserHasTest], (req, res) => {
+    const newQuestion = req.body;
+    const id = req.params.id
+    testModel.updateQuestion(id, newQuestion)
+})
+
 module.exports = testRouter;
 

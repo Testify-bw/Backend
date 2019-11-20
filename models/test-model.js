@@ -95,3 +95,9 @@ function updateAnswer(id, newAnswer) {
         .where('a.id', id)
         .update({correct_answer: newAnswer})
 }
+
+function updateQuestion(id, newQuestion) {
+    return db ('test_questions as q')
+        .where('q.id', id)
+        .update(newQuestion)
+}
