@@ -52,11 +52,11 @@ function insertTest(submission) {
                         console.log(`ids after insert newQuestion`, ids)
                         const { answer } = question
                         const [question_id] = ids
+                        insertAnswer(answer, question_id)
                         // console.log(`answer from question`, answer)
                         // console.log(`question_choices`, question_choices)
                         question_choices ? insertChoices(question_choices, question_id) : null
 
-                        insertAnswer(answer, question_id)
                     })
             })
             return findTestById(id)
@@ -73,15 +73,17 @@ function insertChoices(choices, id) {
         console.log(`inserting choiceEntry`, choiceEntry)
         db('question_choices')
             .insert(choiceEntry)
+            .then()
     })
 }
 
 function insertAnswer(answer, id) {
     const answerEntry = {
-        answer,
+        correct_answer: answer,
         question_id: id
     };
     console.log(`inserting answerEntry`, answerEntry)
     return db('test_question_answer')
         .insert(answerEntry)
+        .then()
 }
