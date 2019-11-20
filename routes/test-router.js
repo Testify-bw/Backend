@@ -49,7 +49,7 @@ testRouter.get("/users/:id", (req, res) => {
         });
 });
 
-testRouter.post('/add', requireValidToken, (req, res) => {
+testRouter.post('/add', [requireValidToken, ensureUserHasTest], (req, res) => {
     const submission = req.body;
     testModel.insertTest(submission)
         .then(test => {
@@ -61,6 +61,12 @@ testRouter.post('/add', requireValidToken, (req, res) => {
                 error: err.toString()
             });
         })
+})
+
+testRouter.put('/test/answer/:id', [requireValidToken, ensureUserHasTest], (req, res) => {
+    const newAnswer = req.body;
+    const id = req.params.id
+    testModel.updateAnswer(id, newAnswer)
 })
 
 module.exports = testRouter;

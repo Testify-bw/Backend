@@ -3,7 +3,8 @@ const db = require("../data/db-config");
 module.exports = {
     findTestById,
     findUserTestsById,
-    insertTest
+    insertTest,
+    updateAnswer
 }
 
 function findTestById(id) {
@@ -86,4 +87,11 @@ function insertAnswer(answer, id) {
     return db('test_question_answer')
         .insert(answerEntry)
         .then(console.log(answerEntry, `submitted`))
+}
+
+function updateAnswer(id, newAnswer) {
+
+    return db('test_question_answer as a')
+        .where('a.id', id)
+        .update({correct_answer: newAnswer})
 }
