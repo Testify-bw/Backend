@@ -7,21 +7,21 @@ exports.seed = function (knex) {
       return knex('users').insert([
         {
           username: 't_cromwell',
-          password: 'password',
+          password: '$2a$12$FwsIOsqxHuySBM6wqUTZkOfQwjkb7PzSQ6IE7qAjIH108wdrjIWYG',
           first_name: 'Thomas',
           last_name: 'Cromwell',
           role: 'student'
         },
         {
           username: 'a_boleyn',
-          password: 'password',
+          password: '$2a$12$FwsIOsqxHuySBM6wqUTZkOfQwjkb7PzSQ6IE7qAjIH108wdrjIWYG',
           first_name: 'Anne',
           last_name: 'Boleyn',
           role: 'student'
         },
         {
           username: 't_wolsey',
-          password: 'password',
+          password: '$2a$12$FwsIOsqxHuySBM6wqUTZkOfQwjkb7PzSQ6IE7qAjIH108wdrjIWYG',
           first_name: 'Thomas',
           last_name: 'Wolsey',
           role: 'instructor'
