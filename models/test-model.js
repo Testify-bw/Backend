@@ -48,20 +48,17 @@ function insertTest(submission) {
                     .insert(newQuestion, 'id')
                     // insert options
                     .then(ids => {
-                        // console.log(`~~
-                        // QUESTION~ 
-                        // ~~~`, question)
+
                         console.log(`ids after insert newQuestion`, ids)
                         const { answer } = question
                         const [question_id] = ids
                         insertAnswer(answer, question_id)
-                        // console.log(`answer from question`, answer)
-                        // console.log(`question_choices`, question_choices)
+
                         question_choices ? insertChoices(question_choices, question_id) : null
 
                     })
             })
-            return findTestById(id)
+                .then(findTestById(id))
         })
 }
 
