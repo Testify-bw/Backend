@@ -106,3 +106,5 @@ dist
 
 #yarn lock file
 yarn.lock
+
+.db3

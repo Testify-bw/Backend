@@ -11,8 +11,8 @@ const questionsRouter = require('../routes/questions-router');
 // all urls are prepended with /api
 router.use('/register', registerRouter);
 router.use('/login', authRouter);
-router.use('/users', userRouter);
 router.use("/users", testRouter);
+router.use('/users', userRouter);
 router.use('/submissions', submissionsRouter);
 router.use('/answers', answersRouter);
 router.use('/questions', questionsRouter);
