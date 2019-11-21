@@ -91,7 +91,7 @@ function insertAnswer(answer, id) {
 
 function update(id, changes) {
     return db('tests')
-        .insert(changes)
+        .update(changes)
         .where('tests.id', id)
         .then(findTestById(id))
 }
