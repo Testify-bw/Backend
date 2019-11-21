@@ -50,13 +50,14 @@ testRouter.get("/:id/tests", (req, res) => {
         });
 });
 
-testRouter.post('test/add', requireValidToken, (req, res) => {
+testRouter.post('/test/add', requireValidToken, (req, res) => {
     const submission = req.body;
     testModel.insertTest(submission)
         .then(test => {
-            res.status(200).json(test)
+            res.status(201).json(test)
         })
         .catch(err => {
+            console.log("/test/add", err);
             res.status(500).json({
                 message: `Error adding test to the database.`,
                 error: err.toString()

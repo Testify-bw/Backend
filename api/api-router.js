@@ -8,8 +8,8 @@ const submissionsRouter = require('../routes/submission-router');
 // all urls are prepended with /api
 router.use('/register', registerRouter);
 router.use('/login', authRouter);
-router.use('/users', userRouter);
 router.use("/users", testRouter);
+router.use('/users', userRouter);
 router.use('/submissions', submissionsRouter);
 // submissionsRouter
 // classesRouter
