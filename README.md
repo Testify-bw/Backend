@@ -202,3 +202,54 @@ Updating the answer only requires a string be passed in the PUT request.
 
 \*\*Must have same structure as test object from GET request.
 
+#### Listing all classes
+
+| method | Endpoint                   | Data Sent                                   | Data Returned |
+| ------ | -------------------------- | ------------------------------------------- | ------------- |
+| GET    | /api/classes               | n/a                                         | Array of objects containing class information|
+
+## example output
+
+```
+[
+    {
+        "id": 1,
+        "class_name": "Potions"
+    },
+    {
+        "id": 2,
+        "class_name": "Intro to React"
+    },
+    {
+        "id": 3,
+        "class_name": "Calculus"
+    }
+]
+```
+
+#### Set user classes 
+### requires instructor role
+### deletes user's old classes
+| method | Endpoint                   | Data Sent                                   | Data Returned |
+| ------ | -------------------------- | ------------------------------------------- | ------------- |
+| PUT    | /api/users/:id/classes     | Array of class ids            | Array of objects containing class information|
+
+## example input
+
+{
+	"classes": [1, 2]
+}
+
+## example output
+
+[
+    {
+        "class_name": "Potions",
+        "id": 1
+    },
+    {
+        "class_name": "Intro to React",
+        "id": 2
+    }
+]
+
