@@ -76,4 +76,9 @@ function addUserClasses(id, classes) {
 
   return db("user_classes")
   .insert(classesToInsert);
+  
+  /*return db('classes')
+    .select('class_name', 'id')
+    .join('user_classes as uc', 'id', 'uc.id')
+    .where('uc.user_id', id)*/
 }

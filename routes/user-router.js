@@ -104,4 +104,18 @@ router.put("/:id/classes", requireValidToken, (req, res) => {
   })
 });
 
+router.get('/classes', requireValidToken, (req, res) => {
+  const { id } = req.params;
+  Users.getUserClasses(id)
+    .then(classes => {
+      res.status(200).json(classees)
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: `Error retrieving list of classes from the database.`,
+        error: err.toString()
+      });
+    })
+})
+
 module.exports = router;
