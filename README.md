@@ -4,13 +4,17 @@ Initialize this project with the command `npm i`.
 
 package.json includes the following dependencies:
 
-- express
-- morgan
-- bcryptjs
-- dotenv
-- helmet
-- knex
-- sqlite3
+### Dependencies
+
+| Dependencies | dev Dependencies |
+| ------------ | ---------------- |
+| express      | cross-env        |
+| morgan       | jest             |
+| bcryptjs     | nodemon          |
+| dotenv       | supertest        |
+| knex         |                  |
+| sqlite3      |                  |
+| pg           |                  |
 
 and dev dependencies
 
@@ -19,7 +23,8 @@ and dev dependencies
 - nodemon
 - supertest
 
-### Folder and File Structure
+<details>
+    <summary> Folder and File Structure </summary>
 
 The below represents the scaffolding structure for the project.
 
@@ -47,7 +52,7 @@ The below represents the scaffolding structure for the project.
     		 - testing.db3
     		migrations
     		seeds
-
+</details>
 ## Scripts
 
 Use `npm run tests` to run tests.
@@ -74,7 +79,7 @@ Data in `users` will initially be seeded with filler data.
 
 # API
 
-This API is hosted at https://bw-testify.herokuapp.com
+This API is hosted at https://bw-testify.herokuapp.com/
 
 ## Endpoints
 
@@ -122,3 +127,78 @@ Each entry in an array represents a user and will look so:
 `{ id, username, first_name, last_name, role, classes** }`
 
 \*\* As soon as class lists are implemented in the database, an array of classes the user is associated with will be returned inside the user object.
+
+### Adding a Test
+
+| method | Endpoint            | Data Sent                   | Data Returned           |
+| ------ | ------------------- | --------------------------- | ----------------------- |
+| GET    | /api/users/test/:id |                      | Object containing test. |
+| POST   | /api/users/test/add | Object containing test      | n/a                     |
+| PUT    | /api/users/test/:id | object with test properties | n/a                     |
+| DEL    | /api/users/test/:id |                        | n/a                     |
+
+#### Example Test Object
+
+The server will return a test object that looks so:
+
+```
+{
+test_name: "NEW New Test for POST",
+class_id: 2,
+author_id: 1,
+questions: [{
+short_answer: false,
+ text: 'Is this a new question?',
+ answer: 'Yes',
+ question_choices: [
+
+   'Yes', 'No', 'Maybe'
+]
+},
+{
+short_answer: true,
+ text: 'A majority of this project was written in what language?',
+ answer:  "Javascript"
+}]
+}
+```
+When making PUT requests for a test, the only properties in the test object need to be `test_name`, `class_id`, and `author_id`. The questions and answers will be updated using the methods  below.
+
+#### Updating Test Questions
+
+| method | Endpoint           | Data Sent                        | Data Returned |
+| ------ | ------------------ | -------------------------------- | ------------- |
+| PUT    | /api/questions/:id |  question object        | n/a           |
+| DEL    | /api/questions/:id |                       | Data Returned |
+
+A question object can look so:
+```
+{
+short_answer: false,
+ text: 'Is this a new question?',
+ answer: 'Yes',
+ question_choices: [
+
+   'Yes', 'No', 'Maybe'
+]
+
+```
+
+#### Updating Test Answers
+
+| method | Endpoint         | Data Sent                      | Data Returned |
+| ------ | ---------------- | ------------------------------ | ------------- |
+| PUT    | /api/answers/:id |  object with changes | n/a           |
+| DEL    | /api/answers/:id |       n/a       | Data Returned |
+
+Updating the answer only requires a string be passed in the PUT request.
+
+### Adding Submission
+
+| method | Endpoint                   | Data Sent                                   | Data Returned |
+| ------ | -------------------------- | ------------------------------------------- | ------------- |
+| POST   | /api/users/test/answer/:id | test object containing array of answers\*\* | n/a           |
+
+
+\*\*Must have same structure as test object from GET request.
+
