@@ -110,13 +110,13 @@ function insertAnswer(answer, id) {
 function update(id, changes) {
     return db('tests')
         .insert(changes)
-        .where('test.id', id)
+        .where('tests.id', id)
         .then(findTestById(id))
 }
 
 function remove(id) {
     return db('tests')
-        .where('test.id', id)
+        .where('tests.id', id)
         .del()
 }
 
