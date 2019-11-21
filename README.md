@@ -23,7 +23,8 @@ and dev dependencies
 - nodemon
 - supertest
 
-### Folder and File Structure
+<details>
+    <summary> Folder and File Structure </summary>
 
 The below represents the scaffolding structure for the project.
 
@@ -51,7 +52,7 @@ The below represents the scaffolding structure for the project.
     		 - testing.db3
     		migrations
     		seeds
-
+</details>
 ## Scripts
 
 Use `npm run tests` to run tests.
@@ -131,49 +132,66 @@ Each entry in an array represents a user and will look so:
 
 | method | Endpoint            | Data Sent                   | Data Returned           |
 | ------ | ------------------- | --------------------------- | ----------------------- |
-| GET    | /api/users/test/:id | test_id                     | Object containing test. |
+| GET    | /api/users/test/:id |                      | Object containing test. |
 | POST   | /api/users/test/add | Object containing test      | n/a                     |
 | PUT    | /api/users/test/:id | object with test properties | n/a                     |
-| DEL    | /api/users/test/:id | id                          | n/a                     |
+| DEL    | /api/users/test/:id |                        | n/a                     |
 
 #### Example Test Object
 
 The server will return a test object that looks so:
 
-````{
+```
+{
+test_name: "NEW New Test for POST",
+class_id: 2,
+author_id: 1,
+questions: [{
+short_answer: false,
+ text: 'Is this a new question?',
+ answer: 'Yes',
+ question_choices: [
 
-"test_name": "NEW New Test for POST",
-"class_id": 2,
-"author_id": 1,
-"questions": [{
-"short_answer": false,
- "text": "Q1 New Test POST",
- "answer":  "Q1 Correct",
- "question_choices": [
-
-   "Correct Answer", "Incorrect Answer 1","Q1 Correct"
+   'Yes', 'No', 'Maybe'
 ]
 },
 {
-"short_answer": true,
- "text": "Q2 New Test POST",
- "answer":  "Q2 Correct Answer"
+short_answer: true,
+ text: 'A majority of this project was written in what language?',
+ answer:  "Javascript"
 }]
-} ```
+}
+```
+When making PUT requests for a test, the only properties in the test object need to be `test_name`, `class_id`, and `author_id`. The questions and answers will be updated using the methods  below.
 
 #### Updating Test Questions
 
 | method | Endpoint           | Data Sent                        | Data Returned |
 | ------ | ------------------ | -------------------------------- | ------------- |
-| PUT    | /api/questions/:id | question_id, object with changes | n/a           |
-| DEL    | /api/questions/:id | question_id                      | Data Returned |
+| PUT    | /api/questions/:id |  question object        | n/a           |
+| DEL    | /api/questions/:id |                       | Data Returned |
+
+A question object can look so:
+```
+{
+short_answer: false,
+ text: 'Is this a new question?',
+ answer: 'Yes',
+ question_choices: [
+
+   'Yes', 'No', 'Maybe'
+]
+
+```
 
 #### Updating Test Answers
 
 | method | Endpoint         | Data Sent                      | Data Returned |
 | ------ | ---------------- | ------------------------------ | ------------- |
-| PUT    | /api/answers/:id | answer_id, object with changes | n/a           |
-| DEL    | /api/answers/:id | answer_id                      | Data Returned |
+| PUT    | /api/answers/:id |  object with changes | n/a           |
+| DEL    | /api/answers/:id |       n/a       | Data Returned |
+
+Updating the answer only requires a string be passed in the PUT request.
 
 ### Adding Submission
 
