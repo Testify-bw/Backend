@@ -18,41 +18,41 @@ const findUserTestsById = id => {
 }
 
 
-function insertTest(submission) {
+async function insertTest(submission) {
     const { test_name, author_id, questions, class_id } = submission
-    console.log(`insertTest submission.questions`, submission.questions);
+
     const test = {
         test_name,
         author_id,
         class_id
     }
-    console.log(`test object`, test);
+
 
     // insert test into tests table, then retrieve its id
-    return db('tests')
+    return await db('tests')
         .insert(test, 'id')
-        .then(ids => {
+        .then(async ids => {
             const [id] = ids
             // add questions
 
-            questions.map(question => {
-                console.log(`mapped question`, question)
+            questions.map(async question => {
+
                 const { short_answer, text, question_choices } = question
                 let newQuestion = {
                     short_answer,
                     text,
                     test_id: id
                 }
-                console.log(`inserting newQuestion`, newQuestion)
-                db('questions')
+
+                return await db('questions')
                     .insert(newQuestion, 'id')
                     // insert options
-                    .then(ids => {
+                    .then(async ids => {
 
-                        console.log(`ids after insert newQuestion`, ids)
+
                         const { answer } = question
                         const [question_id] = ids
-                        insertAnswer(answer, question_id)
+                        await insertAnswer(answer, question_id)
 
                         question_choices ? insertChoices(question_choices, question_id) : null
 

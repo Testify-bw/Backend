@@ -62,8 +62,8 @@ testRouter.post('/test/add', requireValidToken, (req, res) => {
                 message: `Error adding test to the database.`,
                 error: err.toString()
             });
-        })
-})
+        });
+});
 
 testRouter.put('/test/:id', requireValidToken, (req, res) => {
     const id = req.params.id;
@@ -77,8 +77,8 @@ testRouter.put('/test/:id', requireValidToken, (req, res) => {
                 message: `Error updating test on the database.`,
                 error: err.toString()
             });
-        })
-})
+        });
+});
 
 testRouter.delete('/test/:id', requireValidToken, (req, res) => {
     const { id } = req.params;
@@ -92,8 +92,12 @@ testRouter.delete('/test/:id', requireValidToken, (req, res) => {
                 message: `Error updating test on the database.`,
                 error: err.toString()
             });
-        })
-})
+        });
+});
+
+
+
+
 
 
 
