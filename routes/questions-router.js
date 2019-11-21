@@ -23,7 +23,6 @@ router.put('/:id', [requireValidToken, ensureUserHasTest], (req, res) => {
 
 
 router.delete('/:id', [requireValidToken, ensureUserHasTest], (req, res) => {
-  const newQuestion = req.body;
   const id = req.params.id
   Questions.remove(id)
     .then(edit => {

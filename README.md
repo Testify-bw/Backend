@@ -78,7 +78,7 @@ Data in `users` will initially be seeded with filler data.
 
 # API
 
-This API is hosted at https://bw-testify.herokuapp.com
+This API is hosted at https://bw-testify.herokuapp.com/
 
 ## Endpoints
 
@@ -129,31 +129,58 @@ Each entry in an array represents a user and will look so:
 
 ### Adding a Test
 
-| method | Endpoint            | Data Sent               | Data Returned           |
-| ------ | ------------------- | ----------------------- | ----------------------- |
-| GET    | /api/users/test/:id | test_id                 | Object containing test. |
-| POST   | /api/users/test/add | Object containing test  | n/a                     |
-| PUT    | wip                 | id, object with changes | n/a                     |
-| DEL    | wip                 | id                      | n/a                     |
+| method | Endpoint            | Data Sent                   | Data Returned           |
+| ------ | ------------------- | --------------------------- | ----------------------- |
+| GET    | /api/users/test/:id | test_id                     | Object containing test. |
+| POST   | /api/users/test/add | Object containing test      | n/a                     |
+| PUT    | /api/users/test/:id | object with test properties | n/a                     |
+| DEL    | /api/users/test/:id | id                          | n/a                     |
+
+#### Example Test Object
+
+The server will return a test object that looks so:
+
+````{
+
+"test_name": "NEW New Test for POST",
+"class_id": 2,
+"author_id": 1,
+"questions": [{
+"short_answer": false,
+ "text": "Q1 New Test POST",
+ "answer":  "Q1 Correct",
+ "question_choices": [
+
+   "Correct Answer", "Incorrect Answer 1","Q1 Correct"
+]
+},
+{
+"short_answer": true,
+ "text": "Q2 New Test POST",
+ "answer":  "Q2 Correct Answer"
+}]
+} ```
 
 #### Updating Test Questions
 
-| method | Endpoint       | Data Sent                        | Data Returned |
-| ------ | -------------- | -------------------------------- | ------------- |
-| PUT    | /questions/:id | question_id, object with changes | n/a           |
-| DEL    | /questions/:id | question_id                      | Data Returned |
+| method | Endpoint           | Data Sent                        | Data Returned |
+| ------ | ------------------ | -------------------------------- | ------------- |
+| PUT    | /api/questions/:id | question_id, object with changes | n/a           |
+| DEL    | /api/questions/:id | question_id                      | Data Returned |
 
 #### Updating Test Answers
 
-| method | Endpoint     | Data Sent                      | Data Returned |
-| ------ | ------------ | ------------------------------ | ------------- |
-| PUT    | /answers/:id | answer_id, object with changes | n/a           |
-| DEL    | /answers/:id | answer_id                      | Data Returned |
+| method | Endpoint         | Data Sent                      | Data Returned |
+| ------ | ---------------- | ------------------------------ | ------------- |
+| PUT    | /api/answers/:id | answer_id, object with changes | n/a           |
+| DEL    | /api/answers/:id | answer_id                      | Data Returned |
 
 ### Adding Submission
 
-| method | Endpoint               | Data Sent                                   | Data Returned |
-| ------ | ---------------------- | ------------------------------------------- | ------------- |
-| POST   | /users/test/answer/:id | test object containing array of answers\*\* | n/a           |
+| method | Endpoint                   | Data Sent                                   | Data Returned |
+| ------ | -------------------------- | ------------------------------------------- | ------------- |
+| POST   | /api/users/test/answer/:id | test object containing array of answers\*\* | n/a           |
+
 
 \*\*Must have same structure as test object from GET request.
+

@@ -4,7 +4,6 @@ const Answers = require("../models/answers-model");
 const ensureUserHasTest = require("../middleware/ensureUserHasTest");
 
 router.delete('/:id', [requireValidToken, ensureUserHasTest], (req, res) => {
-  const newAnswer = req.body;
   const id = req.params.id
   Answers.remove(id)
     .then(edit => {
