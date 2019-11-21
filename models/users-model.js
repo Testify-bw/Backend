@@ -7,6 +7,8 @@ module.exports = {
   findAllBy,
   findById,
   add,
+  getUserClasses,
+  getUserTests
 }
 
 function find() {
@@ -44,3 +46,15 @@ function add(user) {
 }
 
 
+function getUserTests(id) {
+  return db
+    .select('classes as c', 'users as u')
+    .join('user_classes as uc')
+}
+
+function getUserClasses(id) {
+  return db('classes')
+    .select('class_name', 'id')
+    .join('user_classes as uc', 'id', 'uc.id')
+    .where('uc.user_id', id)
+}
