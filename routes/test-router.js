@@ -66,11 +66,11 @@ testRouter.post('/test/add', requireValidToken, (req, res) => {
 })
 
 testRouter.put('/test/:id', requireValidToken, (req, res) => {
-    const { id } = req.params;
-    const { changes } = req.body;
+    const id = req.params.id;
+    const changes = req.body;
     testModel.update(id, changes)
-        .then(changes => {
-            res.status(200).json(changes)
+        .then(update => {
+            res.status(200).json(update)
         })
         .catch(err => {
             res.status(500).json({
