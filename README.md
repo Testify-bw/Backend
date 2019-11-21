@@ -181,5 +181,6 @@ The server will return a test object that looks so:
 | ------ | -------------------------- | ------------------------------------------- | ------------- |
 | POST   | /api/users/test/answer/:id | test object containing array of answers\*\* | n/a           |
 
-\*\*Must have same structure
-````
+
+\*\*Must have same structure as test object from GET request.
+
