@@ -107,14 +107,28 @@ function insertAnswer(answer, id) {
         .then(/*console.log(answerEntry, `submitted`)*/)
 }
 
+function update(id, changes) {
+    return db('tests')
+        .insert(changes)
+        .where('test.id', id)
+        .then(()
+            => { return findTestById(id) }
+        )
+}
 
-
+function remove(id) {
+    return db('tests')
+        .where('test.id', id)
+        .del()
+}
 
 module.exports = {
     findTestById,
     findUserTestsById,
     insertTest,
     insertChoices,
-    insertAnswer
+    insertAnswer,
+    remove,
+    update
 }
 
