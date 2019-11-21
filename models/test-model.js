@@ -18,12 +18,12 @@ const findUserTestsById = id => {
 }
 function insertTest(submission) {
     // console.log(`insertTest submission`, submission);
-    
+
 
     // console.log(`test object`, test);
 
     const { test_name, author_id, class_id } = submission
-    
+
     const test = {
         test_name,
         author_id,
@@ -43,9 +43,9 @@ function insertTest(submission) {
             const questions = [], choiceArrs = [], answers = [];
 
             submission.questions.map(question => {
-                const {text, short_answer, question_choices, answer} = question;
+                const { text, short_answer, question_choices, answer } = question;
 
-                questions.push({text, short_answer, test_id});
+                questions.push({ text, short_answer, test_id });
                 choiceArrs.push(question_choices);
                 answers.push(answer);
             });
@@ -53,30 +53,30 @@ function insertTest(submission) {
             // console.log("questions=", questions);
 
             return db("questions")
-            .insert(questions, "id")
-            .then(ids => {
-                const [lastId] = ids;
-                const firstId = lastId - questions.length + 1;
-
-                const choicesToInsert = [];
-                const answersToInsert = [];
-
-                // choices.map((choice, idx) => choice.question_id = firstId + idx);
-
-                choiceArrs.forEach((arr, idx) => {
-                    answersToInsert.push({correct_answer: answers[idx], question_id: firstId + idx});
-                    arr.forEach((choice) => {
-                        choicesToInsert.push({choice: choice, question_id: firstId + idx})
-                    });
-                });
-
-                return db("question_choices")
-                .insert(choicesToInsert, "id")
+                .insert(questions, "id")
                 .then(ids => {
-                    return db("question_answers")
-                    .insert(answersToInsert);
+                    const [lastId] = ids;
+                    const firstId = lastId - questions.length + 1;
+
+                    const choicesToInsert = [];
+                    const answersToInsert = [];
+
+                    // choices.map((choice, idx) => choice.question_id = firstId + idx);
+
+                    choiceArrs.forEach((arr, idx) => {
+                        answersToInsert.push({ correct_answer: answers[idx], question_id: firstId + idx });
+                        arr.forEach((choice) => {
+                            choicesToInsert.push({ choice: choice, question_id: firstId + idx })
+                        });
+                    });
+
+                    return db("question_choices")
+                        .insert(choicesToInsert, "id")
+                        .then(ids => {
+                            return db("question_answers")
+                                .insert(answersToInsert);
+                        });
                 });
-            });
         })
     // .then(() => { return findTestById(id) })
 }
@@ -108,31 +108,6 @@ function insertAnswer(answer, id) {
 }
 
 
-// function updateAnswer(id, newAnswer) {
-
-//     return db('test_question_answer as a')
-//         .where('a.id', id)
-//         .update({correct_answer: newAnswer})
-// }
-
-// function updateQuestion(id, newQuestion) {
-//     return db ('test_questions as q')
-//         .where('q.id', id)
-//         .update(newQuestion)
-// }
-
-
-
-// function getSubmissionsByStudent(id) {
-//     // shows username from users, test name from test, array of questions and answers
-//     let query = db('student_submissions as sub')
-//             .select('sub.id', 'sub.test_id', 'sub.submission_number', 'sub.submission_time', 'sub.student_id', 'users.username')
-//             .join('submitted_answer as ans', 'sub.id', 'ans.submission_id')
-//             .join('users', 'sub.student_id', 'users.id')
-//             .join('test_questions as tq', 'sub.test_id', 'tq.test_id' )
-//             .join('tests', 'sub.test_id', 'tests.id')
-
-// }
 
 
 module.exports = {
