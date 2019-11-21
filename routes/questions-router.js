@@ -1,11 +1,11 @@
 const requireValidToken = require("../middleware/requireValidToken");
-const testRouter = require("express").Router();
+const router = require("express").Router();
 const Questions = require("../models/questions-model");
 const ensureUserHasTest = require("../middleware/ensureUserHasTest");
 
 
 
-testRouter.put('/:id', [requireValidToken, ensureUserHasTest], (req, res) => {
+router.put('/:id', [requireValidToken, ensureUserHasTest], (req, res) => {
   const newQuestion = req.body;
   const id = req.params.id
   Questions.updateQuestion(id, newQuestion)
@@ -22,7 +22,7 @@ testRouter.put('/:id', [requireValidToken, ensureUserHasTest], (req, res) => {
 
 
 
-testRouter.delete('/:id', [requireValidToken, ensureUserHasTest], (req, res) => {
+router.delete('/:id', [requireValidToken, ensureUserHasTest], (req, res) => {
   const newQuestion = req.body;
   const id = req.params.id
   Questions.remove(id)
