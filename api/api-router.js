@@ -7,6 +7,7 @@ const testRouter = require("../routes/test-router");
 const submissionsRouter = require('../routes/submission-router');
 const answersRouter = require('../routes/answers-router');
 const questionsRouter = require('../routes/questions-router');
+const classesRouter = require("../routes/classes-router");
 
 // all urls are prepended with /api
 router.use('/register', registerRouter);
@@ -16,6 +17,7 @@ router.use('/users', userRouter);
 router.use('/submissions', submissionsRouter);
 router.use('/answers', answersRouter);
 router.use('/questions', questionsRouter);
+router.use("/classes", classesRouter);
 // submissionsRouter
 // classesRouter
 

@@ -8,7 +8,9 @@ module.exports = {
   findById,
   add,
   getUserClasses,
-  getUserTests
+  getUserTests,
+  removeUserClasses,
+  addUserClasses
 }
 
 function find() {
@@ -20,7 +22,7 @@ function find() {
 function findBy(filter) {
   return db('users')
     .where(filter)
-    .first()
+    .first();
 }
 
 function findAllBy(filter) {
@@ -53,8 +55,30 @@ function getUserTests(id) {
 }
 
 function getUserClasses(id) {
-  return db('classes')
+  return db('user_classes as uc')
+    .select('class_name', 'classes.id')
+    .join('classes', 'classes.id', 'uc.class_id')
+    .where({'uc.user_id': id});
+}
+
+function removeUserClasses(id) {
+  return db("user_classes")
+  .del()
+  .where({"user_id": id});
+}
+
+function addUserClasses(id, classes) {
+  console.log("classes:", typeof classes);
+
+  const classesToInsert = classes.map(classId => {
+    return {user_id: id, class_id: classId}
+  });
+
+  return db("user_classes")
+  .insert(classesToInsert);
+  
+  /*return db('classes')
     .select('class_name', 'id')
     .join('user_classes as uc', 'id', 'uc.id')
-    .where('uc.user_id', id)
+    .where('uc.user_id', id)*/
 }

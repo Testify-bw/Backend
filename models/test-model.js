@@ -45,8 +45,8 @@ function insertTest(submission) {
             submission.questions.map(question => {
                 const { text, short_answer, question_choices, answer } = question;
 
-                questions.push({ text, short_answer, test_id });
-                choiceArrs.push(question_choices);
+                questions.push({text, short_answer, test_id});
+                choiceArrs.push(question_choices ? question_choices : []);
                 answers.push(answer);
             });
 
@@ -78,7 +78,6 @@ function insertTest(submission) {
                         });
                 });
         })
-    // .then(() => { return findTestById(id) })
 }
 
 function insertChoices(choices, id) {
@@ -107,11 +106,14 @@ function insertAnswer(answer, id) {
         .then(/*console.log(answerEntry, `submitted`)*/)
 }
 
+
 function update(id, changes) {
     return db('tests')
-        .insert(changes)
         .where('tests.id', id)
-        .then(findTestById(id))
+        .update(changes)
+        .then(() => {
+            return getById(id)
+        })
 }
 
 function remove(id) {
