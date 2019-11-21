@@ -108,7 +108,7 @@ router.get('/classes', requireValidToken, (req, res) => {
   const { id } = req.params;
   Users.getUserClasses(id)
     .then(classes => {
-      res.status(200).json(classees)
+      res.status(200).json(classes)
     })
     .catch(err => {
       res.status(500).json({
