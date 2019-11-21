@@ -46,7 +46,7 @@ function insertTest(submission) {
                 const {text, short_answer, question_choices, answer} = question;
 
                 questions.push({text, short_answer, test_id});
-                choiceArrs.push(question_choices);
+                choiceArrs.push(question_choices ? question_choices : []);
                 answers.push(answer);
             });
 
