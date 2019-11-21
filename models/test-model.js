@@ -111,9 +111,7 @@ function update(id, changes) {
     return db('tests')
         .insert(changes)
         .where('test.id', id)
-        .then(()
-            => { return findTestById(id) }
-        )
+        .then(findTestById(id))
 }
 
 function remove(id) {
