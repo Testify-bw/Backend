@@ -19,7 +19,7 @@ router.post('/', (req, res) => {
       } else if (user && bcrypt.compareSync(password, user.password)) {
         const token = getJwtToken(user)
         console.log(`user returned by findBy in login request`, user);
-        res.status(201).json({
+        res.status(200).json({
           message: `Welcome, ${user.first_name} ${user.last_name}!`,
           token
         });
