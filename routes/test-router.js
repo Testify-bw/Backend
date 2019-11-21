@@ -64,6 +64,36 @@ testRouter.post('test/add', requireValidToken, (req, res) => {
         })
 })
 
+testRouter.put('/test/:id', requireValidToken, (req, res) => {
+    const { id } = req.params;
+    const { changes } = req.body;
+    testModel.update(id, changes)
+        .then(changes => {
+            res.status(200).json(changes)
+        })
+        .catch(err => {
+            res.status(500).json({
+                message: `Error updating test on the database.`,
+                error: err.toString()
+            });
+        })
+})
+
+testRouter.delete('/test/:id', requireValidToken, (req, res) => {
+    const { id } = req.params;
+
+    testModel.remove(id)
+        .then(changes => {
+            res.status(200).json(changes)
+        })
+        .catch(err => {
+            res.status(500).json({
+                message: `Error updating test on the database.`,
+                error: err.toString()
+            });
+        })
+})
+
 
 
 // testRouter.post('/test/:test-id/submit-answers', [requireValidToken, ensureUserHasTest], (req, res) => {
