@@ -20,7 +20,7 @@ function find() {
 function findBy(filter) {
   return db('users')
     .where(filter)
-    .first()
+    .first();
 }
 
 function findAllBy(filter) {
@@ -53,8 +53,8 @@ function getUserTests(id) {
 }
 
 function getUserClasses(id) {
-  return db('classes')
-    .select('class_name', 'id')
-    .join('user_classes as uc', 'id', 'uc.id')
-    .where('uc.user_id', id)
+  return db('user_classes as uc')
+    .select('class_name', 'classes.id')
+    .join('classes', 'classes.id', 'uc.class_id')
+    .where({'uc.user_id': id});
 }

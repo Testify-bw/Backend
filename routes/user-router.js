@@ -3,6 +3,7 @@
 const router = require('express').Router();
 
 const Users = require('../models/users-model');
+const classesModel = require("../models/classes-model");
 const requireValidToken = require('../middleware/requireValidToken');
 
 
@@ -36,11 +37,11 @@ router.get('/roles/:role', requireValidToken, (req, res) => {
     });
 });
 
-router.get('/classes', requireValidToken, (req, res) => {
+router.get('/:id/classes', requireValidToken, (req, res) => {
   const { id } = req.params;
   Users.getUserClasses(id)
     .then(classes => {
-      res.status(200).json(classees)
+      res.status(200).json(classes)
     })
     .catch(err => {
       res.status(500).json({
@@ -48,6 +49,23 @@ router.get('/classes', requireValidToken, (req, res) => {
         error: err.toString()
       });
     })
-})
+});
+
+//add user to class
+router.post("/:id/classes", requireValidToken, (req, res) => {
+  if(req.decodedJwt.role !== "instructor") {
+    res.status(403).json({message: "only instructors and add users to a class"});
+    return;
+  }
+
+  Users.findBy({id: req.params.id})
+  .then(user => {
+    res.status(200).json(user);
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json({message: "error retrieving user information"});
+  })
+});
 
 module.exports = router;
