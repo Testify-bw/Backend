@@ -9,7 +9,7 @@ const testUser = {
   role: 'student'
 }
 
-/*
+
 it('DB should operate in testing ', () => {
   expect(process.env.DB_ENV).toBe('testing')
 });
@@ -57,7 +57,7 @@ describe('POST api/login', () => {
       .send(testUser)
       .expect('Content-Type', /json/)
   })
-})*/
+})
 
 
 /*
@@ -103,9 +103,9 @@ describe("POST /api/users/test/add", () => {
 
   it("returns status 201 when posting a new test", async () => {
     const res = await request(server)
-    .post("/api/users/test/add")
-    .set("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsInVzZXJuYW1lIjoidF93b2xzZXkiLCJmaXJzdF9uYW1lIjoiVGhvbWFzIiwibGFzdF9uYW1lIjoiV29sc2V5Iiwicm9sZSI6Imluc3RydWN0b3IiLCJpYXQiOjE1NzQyOTM5OTE0NTEsImV4cCI6MTU3NDI5NDAyNzQ1MX0.wli6zQTJhQNEljLbVhAgmqp9CXCuC8aotib5BN-Zaw4")
-    .send(testObj);
+      .post("/api/users/test/add")
+      .set("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsInVzZXJuYW1lIjoidF93b2xzZXkiLCJmaXJzdF9uYW1lIjoiVGhvbWFzIiwibGFzdF9uYW1lIjoiV29sc2V5Iiwicm9sZSI6Imluc3RydWN0b3IiLCJpYXQiOjE1NzQyOTM5OTE0NTEsImV4cCI6MTU3NDI5NDAyNzQ1MX0.wli6zQTJhQNEljLbVhAgmqp9CXCuC8aotib5BN-Zaw4")
+      .send(testObj);
 
     expect(res.status).toBe(201);
   })

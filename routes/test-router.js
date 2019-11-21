@@ -66,11 +66,11 @@ testRouter.post('/test/add', requireValidToken, (req, res) => {
 });
 
 testRouter.put('/test/:id', requireValidToken, (req, res) => {
-    const { id } = req.params;
-    const { changes } = req.body;
+    const id = req.params.id;
+    const changes = req.body;
     testModel.update(id, changes)
-        .then(changes => {
-            res.status(200).json(changes)
+        .then(update => {
+            res.status(200).json(update)
         })
         .catch(err => {
             res.status(500).json({
@@ -101,21 +101,5 @@ testRouter.delete('/test/:id', requireValidToken, (req, res) => {
 
 
 
-// testRouter.post('/test/:test-id/submit-answers', [requireValidToken, ensureUserHasTest], (req, res) => {
-//     const submission = {
-//         ...req.body,
-//         test_id: req.params.test - id
-//     }
-//     testModel.insertStudentSubmission(submission)
-//         .then(submission => {
-//             res.status(200).json(submission)
-//         })
-//         .catch(err => {
-//             res.status(500).json({
-//                 message: `Error retrieving list of users from the database.`,
-//                 error: err.toString()
-//             });
-//         })
-// })
 
 module.exports = testRouter;
