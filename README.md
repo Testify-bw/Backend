@@ -156,4 +156,4 @@ Each entry in an array represents a user and will look so:
 | ------ | ---------------------- | ------------------------------------------- | ------------- |
 | POST   | /users/test/answer/:id | test object containing array of answers\*\* | n/a           |
 
-\*\*Must have same structure
+\*\*Must have same structure as test object from GET request.
