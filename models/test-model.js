@@ -16,70 +16,56 @@ const findUserTestsById = id => {
         .join("tests", "tests.class_id", "user_classes.class_id")
         .where({ user_id: id });
 }
+
+
 function insertTest(submission) {
-    // console.log(`insertTest submission`, submission);
-
-
-    // console.log(`test object`, test);
-
-    const { test_name, author_id, class_id } = submission
-
+    console.log(`insertTest submission`, submission);
+    const { test_name, author_id, questions, class_id } = submission
     const test = {
         test_name,
         author_id,
         class_id
     }
-
-    console.log("insertTest")
-    console.log("_______________________________________")
-
+    console.log(`test object`, test);
 
     // insert test into tests table, then retrieve its id
     return db('tests')
         .insert(test, 'id')
         .then(ids => {
-            const [test_id] = ids;
+            const [id] = ids
+            // add questions
 
-            const questions = [], choiceArrs = [], answers = [];
+            questions.map(question => {
+                console.log(`mapped question`, question)
+                const { short_answer, text, question_choices } = question
+                let newQuestion = {
+                    short_answer,
+                    text,
+                    test_id: id
+                }
+                console.log(`inserting newQuestion`, newQuestion)
+                db('questions')
+                    .insert(newQuestion, 'id')
+                    // insert options
+                    .then(ids => {
+                        // console.log(`~~
+                        // QUESTION~ 
+                        // ~~~`, question)
+                        console.log(`ids after insert newQuestion`, ids)
+                        const { answer } = question
+                        const [question_id] = ids
+                        insertAnswer(answer, question_id)
+                        // console.log(`answer from question`, answer)
+                        // console.log(`question_choices`, question_choices)
+                        question_choices ? insertChoices(question_choices, question_id) : null
 
-            submission.questions.map(question => {
-                const { text, short_answer, question_choices, answer } = question;
-
-                questions.push({ text, short_answer, test_id });
-                choiceArrs.push(question_choices);
-                answers.push(answer);
-            });
-
-            // console.log("questions=", questions);
-
-            return db("questions")
-                .insert(questions, "id")
-                .then(ids => {
-                    const [lastId] = ids;
-                    const firstId = lastId - questions.length + 1;
-
-                    const choicesToInsert = [];
-                    const answersToInsert = [];
-
-                    // choices.map((choice, idx) => choice.question_id = firstId + idx);
-
-                    choiceArrs.forEach((arr, idx) => {
-                        answersToInsert.push({ correct_answer: answers[idx], question_id: firstId + idx });
-                        arr.forEach((choice) => {
-                            choicesToInsert.push({ choice: choice, question_id: firstId + idx })
-                        });
-                    });
-
-                    return db("question_choices")
-                        .insert(choicesToInsert, "id")
-                        .then(ids => {
-                            return db("question_answers")
-                                .insert(answersToInsert);
-                        });
-                });
+                    })
+            })
+            return findTestById(id)
         })
-    // .then(() => { return findTestById(id) })
 }
+
+
 
 function insertChoices(choices, id) {
     choices.map(choice => {
