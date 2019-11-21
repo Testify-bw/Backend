@@ -235,13 +235,13 @@ Updating the answer only requires a string be passed in the PUT request.
 | PUT    | /api/users/:id/classes     | Array of class ids            | Array of objects containing class information|
 
 ## example input
-
+```
 {
 	"classes": [1, 2]
 }
-
+```
 ## example output
-
+```
 [
     {
         "class_name": "Potions",
@@ -252,4 +252,4 @@ Updating the answer only requires a string be passed in the PUT request.
         "id": 2
     }
 ]
-
+```
