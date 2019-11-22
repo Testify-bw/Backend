@@ -227,20 +227,20 @@ Updating the answer only requires a string be passed in the PUT request.
 ]
 ```
 
-#### Set user classes 
+## Set user classes 
 ### requires instructor role
 ### deletes user's old classes
 | method | Endpoint                   | Data Sent                                   | Data Returned |
 | ------ | -------------------------- | ------------------------------------------- | ------------- |
 | PUT    | /api/users/:id/classes     | Array of class ids            | Array of objects containing class information|
 
-## example input
+#### example input
 ```
 {
 	"classes": [1, 2]
 }
 ```
-## example output
+#### example output
 ```
 [
     {
