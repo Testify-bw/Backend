@@ -7,7 +7,6 @@ const { getJwtToken } = require('../helpers/jwt-helpers');
 
 router.post('/', (req, res) => {
   let { username, password } = req.body;
-  console.log(`POST /api/login username, password`, username, password);
 
   Users.findBy({ username })
     .then(user => {
@@ -18,13 +17,11 @@ router.post('/', (req, res) => {
         })
       } else if (user && bcrypt.compareSync(password, user.password)) {
         const token = getJwtToken(user)
-        console.log(`user returned by findBy in login request`, user);
         res.status(200).json({
           message: `Welcome, ${user.first_name} ${user.last_name}!`,
           token
         });
       } else {
-        console.log("user: ", password, user.password)
         res.status(401).json({ message: `User provided incorrect password.` })
       }
     })

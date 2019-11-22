@@ -13,7 +13,7 @@ function getJwtToken(user) {
     role: user.role,
     iat: Date.now()
   };
-  console.log(`getJwtToken payload`, payload)
+
   const secret = process.env.JWT_SECRET || "secret";
 
   const options = {

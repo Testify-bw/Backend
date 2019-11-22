@@ -6,7 +6,6 @@ const { validateRegistration } = require('../helpers/register-helpers');
 
 router.post('/', (req, res) => {
   let user = req.body;
-  console.log(`user in POST api/register`, user);
   const validationResult = validateRegistration(user);
 
   if (validationResult.isSuccessful) {
